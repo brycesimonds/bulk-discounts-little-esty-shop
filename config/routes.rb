@@ -11,13 +11,13 @@ Rails.application.routes.draw do
     get "/items", to: "merchant_items#index"
     get '/items/new', to: 'merchant_items#new'
     post 'items', to: 'merchant_items#create'
-    
     get '/items/:item_id', to: 'merchant_items#show'
     get '/items/:item_id/edit', to: 'merchant_items#edit'
     patch '/items/:item_id', to: 'merchant_items#update'
   end
   
-  get '/merchants/:merchant_id/dashboard', to: 'merchant_dashboards#show'
+    get '/merchants/:merchant_id/dashboard', to: 'merchant_dashboards#show'
+    get 'merchants/:merchant_id/bulk_discounts', to: 'merchant_bulk_discounts#index'
 
   resources :admin, only: :index
 
