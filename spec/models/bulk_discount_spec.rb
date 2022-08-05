@@ -6,11 +6,8 @@ RSpec.describe BulkDiscount do
     it { should validate_numericality_of(:quantity_threshold) }
   end
 
-#   describe 'relationships' do
-#     it { should have_many :invoices }
-#     it { should have_many(:invoice_items).through(:invoices)}
-#     it { should have_many(:items).through(:invoice_items)}
-#     it { should have_many(:merchants).through(:items)}
-#   end
+  describe 'relationships' do
+    it { should belong_to :merchants }
+  end
 end
 
