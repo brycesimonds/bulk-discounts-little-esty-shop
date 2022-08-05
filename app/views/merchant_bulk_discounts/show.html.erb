@@ -1,0 +1,21 @@
+<div class="flex-container">
+  <div id='title'>
+    <h3>Bulk Discount Show Page</h3>
+  </div>
+  <div id='nav'>
+      <th><%= link_to "Dashboard", "/merchants/#{@bulk_discount.merchant.id}/dashboard" %></th>&emsp;
+      <th><%= link_to "My Items", "/merchants/#{@bulk_discount.merchant.id}/items" %></th>&emsp;
+      <th><%= link_to "My Invoices", "/merchants/#{@bulk_discount.merchant.id}/invoices" %></th>
+      <th><%= link_to "My Discounts", "/merchants/#{@bulk_discount.merchant.id}/bulk_discounts" %></th>
+  </div>
+</div>
+
+  <center><h2 style='background-color: #f1f1f1;'>Discount Details</h2></center>
+
+<div class="flex-container">
+
+    <div class='body-left'>
+        <ul>
+            <li>This discount's percentage discount is <%= number_to_percentage(@bulk_discount.percent_discount, precision: 0) %> with a quantity threshold of <%= @bulk_discount.quantity_threshold %> items</li>
+        </ul>
+    </div>
