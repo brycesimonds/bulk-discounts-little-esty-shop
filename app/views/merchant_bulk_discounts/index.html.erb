@@ -1,0 +1,24 @@
+<div class="flex-container">
+  <div id='title'>
+    <h3><%= @merchant.name %>'s' Bulk Discounts</h3>
+  </div>
+  <div id='nav'>
+      <th><%= link_to "Dashboard", "/merchants/#{@merchant.id}/dashboard" %></th>&emsp;
+      <th><%= link_to "My Items", "/merchants/#{@merchant.id}/items" %></th>&emsp;
+      <th><%= link_to "My Invoices", "/merchants/#{@merchant.id}/invoices" %></th>
+  </div>
+</div>
+
+  <center><h2 style='background-color: #f1f1f1;'>My Bulk Discounts</h2></center>
+
+<div class="flex-container">
+
+    <div class='body-left'>
+        <ul>
+            <% @merchant.bulk_discounts.each do |discount| %>
+                <div id="discount-<%= discount.id %>">
+                    <li><%= link_to "This discount is #{number_to_percentage(discount.percent_discount, precision: 0)} off #{discount.quantity_threshold} items", "/merchants/#{@merchant.id}/bulk_discounts/#{discount.id}" %></li>
+                </div>
+            <% end %>
+        </ul>
+    </div>
