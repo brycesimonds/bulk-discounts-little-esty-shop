@@ -1,10 +1,11 @@
 require 'rails_helper'
+require 'faker'
 
 RSpec.describe "merchants invoice index page" do
   describe '#index' do
     it 'shows merchant invoice that includes merchant items' do
-      merchant_1 = Merchant.create!(name: "Bobs Loggers")
-
+      merchant_1 = Merchant.create!(name: Faker::Name.name)
+      
       item_1 = Item.create!(name: "Log", description: "Wood, maple", unit_price: 500, merchant_id: merchant_1.id )
       item_2 = Item.create!(name: "Saw", description: "Metal, sharp", unit_price: 700, merchant_id: merchant_1.id )
       item_3 = Item.create!(name: "Bench", description: "Cedar bench", unit_price: 900, merchant_id: merchant_1.id )
