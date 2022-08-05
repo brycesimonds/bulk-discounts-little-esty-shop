@@ -358,8 +358,8 @@ RSpec.describe 'Merchant Dashboard' do
         visit "/merchants/#{merchant_1.id}/dashboard"
 
         within '#nav' do
-            expect(page).to have_link("View All My Discounts")
-            click_link 'View All My Discounts'
+            expect(page).to have_link("My Discounts")
+            click_link 'My Discounts'
         end
 
         expect(current_path).to eq("/merchants/#{merchant_1.id}/bulk_discounts")
