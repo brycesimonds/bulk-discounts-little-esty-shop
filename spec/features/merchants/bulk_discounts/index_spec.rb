@@ -92,6 +92,7 @@ RSpec.describe 'Bulk Discounts Index Page' do
         end
         expect(current_path).to eq("/merchants/#{merchant_1.id}/bulk_discounts/#{bulk_discount_1.id}")
     end
+    
     it 'has a link that brings you to a create discount page' do
         merchant_1 = Merchant.create!(name: Faker::Name.name)
 
