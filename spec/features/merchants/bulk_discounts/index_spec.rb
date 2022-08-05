@@ -86,11 +86,10 @@ RSpec.describe 'Bulk Discounts Index Page' do
         bulk_discount_5 = BulkDiscount.create!(percent_discount: 30, quantity_threshold: 20, merchant_id: merchant_1.id)
 
         visit "/merchants/#{merchant_1.id}/bulk_discounts"
-
+    
         within "#discount-#{bulk_discount_1.id}" do
             click_on "This discount is 20% off 10 items"
         end
-        
         expect(current_path).to eq("/merchants/#{merchant_1.id}/bulk_discounts/#{bulk_discount_1.id}")
     end
 end 
