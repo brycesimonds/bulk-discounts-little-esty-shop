@@ -183,6 +183,7 @@ RSpec.describe 'Bulk Discounts Index Page' do
             expect(page).to have_button("Delete This Bulk Discount")
         end
     end
+
     it 'when clicked the delete button redirects back to bulk discounts index page and has deleted the record' do
         merchant_1 = Merchant.create!(name: Faker::Name.name)
 
@@ -220,6 +221,8 @@ RSpec.describe 'Bulk Discounts Index Page' do
         within "#discount-#{bulk_discount_1.id}" do
             click_on("Delete This Bulk Discount")
         end
-        expect
+        expect(current_path).to eq("/merchants/#{merchant_1.id}/bulk_discounts")
+        expect(page).to_not have_content("This discount is 20% off 10 items")
+        expect(page).to have_content("This discount is 10% off 5 items")
     end
 end 
