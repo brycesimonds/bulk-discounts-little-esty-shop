@@ -74,7 +74,7 @@ RSpec.describe 'Bulk Discounts Show Page' do
         expect(page).to have_link("Edit This Discount")
 
         click_on "Edit This Discount"
-
+       
         expect(current_path).to eq("/merchants/#{merchant_1.id}/bulk_discounts/#{bulk_discount_1.id}/edit")
     end
 end 
