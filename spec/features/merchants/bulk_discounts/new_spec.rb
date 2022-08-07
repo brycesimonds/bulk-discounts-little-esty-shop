@@ -109,7 +109,7 @@ RSpec.describe 'Bulk Discounts New Page' do
         click_on('Save')
         save_and_open_page
         expect(current_path).to eq("/merchants/#{merchant_1.id}/bulk_discounts/new")
-        expect(page).to have_content("Error: Percent discount must be less than or equal to 100")
+        expect(page).to have_content("Error: Quantity threshold must be greater than 0")
 
 
     end
