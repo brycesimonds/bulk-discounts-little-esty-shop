@@ -19,8 +19,9 @@
         <ul>
             <% @merchant.bulk_discounts.each do |discount| %>
                 <div id="discount-<%= discount.id %>">
-                    <li><%= link_to "This discount is #{number_to_percentage(discount.percent_discount, precision: 0)} off #{discount.quantity_threshold} items", "/merchants/#{@merchant.id}/bulk_discounts/#{discount.id}" %></li>
+                    <li><%= link_to "This discount is #{number_to_percentage(discount.percent_discount, precision: 0)} off #{discount.quantity_threshold} items", "/merchants/#{@merchant.id}/bulk_discounts/#{discount.id}" %></li><%= button_to "Delete This Bulk Discount", "/merchants/#{@merchant.id}/bulk_discounts/#{discount.id}", method: :delete %>
                 </div>
+                <br>
             <% end %>
         </ul>
     </div>
