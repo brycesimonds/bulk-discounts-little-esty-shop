@@ -84,4 +84,33 @@ RSpec.describe 'Bulk Discounts New Page' do
         expect(page).to have_content('25%')
         expect(page).to have_content('15 items')
     end
+
+    it 'create gives warning for invalid data' do
+        merchant_1 = Merchant.create!(name: Faker::Name.name)
+
+        visit "/merchants/#{merchant_1.id}/bulk_discounts/new"
+
+        click_on('Save')
+
+        expect(current_path).to eq("/merchants/#{merchant_1.id}/bulk_discounts/new")
+        expect(page).to have_content("Error: Percent discount is not a number, Quantity threshold is not a number")
+
+        fill_in('percent_discount', with: '110')
+        fill_in('quantity_threshold', with: '5')
+
+        click_on('Save')
+        
+        expect(current_path).to eq("/merchants/#{merchant_1.id}/bulk_discounts/new")
+        expect(page).to have_content("Error: Percent discount must be less than or equal to 100")
+        
+        fill_in('percent_discount', with: '50')
+        fill_in('quantity_threshold', with: '0')
+
+        click_on('Save')
+        save_and_open_page
+        expect(current_path).to eq("/merchants/#{merchant_1.id}/bulk_discounts/new")
+        expect(page).to have_content("Error: Percent discount must be less than or equal to 100")
+
+
+    end
 end 
