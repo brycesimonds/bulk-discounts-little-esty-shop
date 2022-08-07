@@ -79,7 +79,7 @@ RSpec.describe 'Bulk Discounts New Page' do
         fill_in('quantity_threshold', with: '15')
 
         click_on('Save')
-
+        
         expect(current_path).to eq("/merchants/#{merchant_1.id}/bulk_discounts")
         expect(page).to have_content('25%')
         expect(page).to have_content('15 items')
@@ -107,7 +107,7 @@ RSpec.describe 'Bulk Discounts New Page' do
         fill_in('quantity_threshold', with: '0')
 
         click_on('Save')
-        save_and_open_page
+        
         expect(current_path).to eq("/merchants/#{merchant_1.id}/bulk_discounts/new")
         expect(page).to have_content("Error: Quantity threshold must be greater than 0")
 
