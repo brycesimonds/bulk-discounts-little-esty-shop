@@ -110,7 +110,5 @@ RSpec.describe 'Bulk Discounts New Page' do
         
         expect(current_path).to eq("/merchants/#{merchant_1.id}/bulk_discounts/new")
         expect(page).to have_content("Error: Quantity threshold must be greater than 0")
-
-
     end
 end 
