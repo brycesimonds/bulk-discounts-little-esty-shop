@@ -31,12 +31,9 @@ RSpec.describe 'Bulk Discounts Edit Page' do
         bulk_discount_1 = BulkDiscount.create!(percent_discount: 20, quantity_threshold: 10, merchant_id: merchant_1.id)
 
         visit "/merchants/#{merchant_1.id}/bulk_discounts/#{bulk_discount_1.id}/edit"
-
-
-        expect(find('form')).to have_content('Percent discount')
-        expect(find('form')).to have_content('20')
-        expect(find('form')).to have_content('Quantity threshold')
-        expect(find('form')).to have_content('10')
+  
+        expect(page).to have_field('Percent discount', with: '20')
+        expect(page).to have_field('Quantity threshold', with: '10')
         expect(find('form')).to_not have_content('Merchant id')
     end
 end 
