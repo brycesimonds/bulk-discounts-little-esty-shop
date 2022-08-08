@@ -5,8 +5,9 @@
   <div id='nav'>
       <th><%= link_to "Dashboard", "/merchants/#{@bulk_discount.merchant.id}/dashboard" %></th>&emsp;
       <th><%= link_to "My Items", "/merchants/#{@bulk_discount.merchant.id}/items" %></th>&emsp;
-      <th><%= link_to "My Invoices", "/merchants/#{@bulk_discount.merchant.id}/invoices" %></th>
-      <th><%= link_to "My Discounts", "/merchants/#{@bulk_discount.merchant.id}/bulk_discounts" %></th>
+      <th><%= link_to "My Invoices", "/merchants/#{@bulk_discount.merchant.id}/invoices" %></th>&emsp;
+      <th><%= link_to "My Discounts", "/merchants/#{@bulk_discount.merchant.id}/bulk_discounts" %></th>&emsp;
+      <th><%= link_to "Edit This Discount", "/merchants/#{@bulk_discount.merchant.id}/bulk_discounts/#{@bulk_discount.id}/edit" %></th>
   </div>
 </div>
 
