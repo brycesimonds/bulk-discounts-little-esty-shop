@@ -243,10 +243,10 @@ RSpec.describe "merchants invoice show page" do
 
     invoice_1 = Invoice.create!(status: 0, created_at: Time.new(2000), customer_id: customer_1.id)
     invoice_2 = Invoice.create!(status: 1, created_at: Time.new(2001), customer_id: customer_2.id)
-    invoice_3 = Invoice.create!(status: 1, created_at: Time.new(2002), customer_id: customer_3.id)
+    invoice_3 = Invoice.create!(status: 2, created_at: Time.new(2002), customer_id: customer_3.id)
     invoice_4 = Invoice.create!(status: 2, created_at: Time.new(2003), customer_id: customer_4.id)
 
-    invoice_item_5 = InvoiceItem.create!(quantity: 10, unit_price: 100, status: 2, item_id: item_5.id, invoice_id: invoice_3.id)
+    invoice_item_5 = InvoiceItem.create!(quantity: 10, unit_price: 100, status: 2, item_id: item_2.id, invoice_id: invoice_3.id)
     invoice_item_6 = InvoiceItem.create!(quantity: 1, unit_price: 1000, status: 2, item_id: item_5.id, invoice_id: invoice_3.id)
 
     bulk_discount_1 = BulkDiscount.create!(percent_discount: 10, quantity_threshold: 10, merchant_id: merchant_1.id)
