@@ -72,7 +72,7 @@ RSpec.describe 'Bulk Discounts Edit Page' do
         click_button 'Update Bulk discount'
 
         expect(current_path).to eq("/merchants/#{merchant_1.id}/bulk_discounts/#{bulk_discount_1.id}")
-  
-        expect(page).to have_field("This discount's percentage discount is 99% with a quantity threshold of 88 items")
+    
+        expect(page).to have_content("This discount's percentage discount is 99% with a quantity threshold of 88 items")
     end
 end 
