@@ -13,6 +13,7 @@ RSpec.describe Item do
     it { should have_many(:invoices).through(:invoice_items) }
     it { should have_many(:transactions).through(:invoices) }
     it { should have_many(:customers).through(:invoices) }
+    it { should have_many(:bulk_discounts).through(:merchant) }
   end
 
   describe '#methods' do
@@ -136,5 +137,26 @@ RSpec.describe Item do
       expect(item_5.top_day).to eq("2022-07-30 16:04:49.000000000 +0000")
       expect(item_6.top_day).to eq("2022-07-29 16:04:49.000000000 +0000")
     end
+
+    it 'returns the bulk discount if any that matches the item' do
+      merchant_1 = Merchant.create!(name: Faker::Name.name)
+  
+      item_1 = Item.create!(name: Faker::Beer.name, description: Faker::Beer.style, unit_price: 500, merchant_id: merchant_1.id )
+      item_2 = Item.create!(name: Faker::Beer.name, description: Faker::Beer.style, unit_price: 500, merchant_id: merchant_1.id )
+  
+      customer_1 = Customer.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name)
+  
+      invoice_1 = Invoice.create!(status: 0, created_at: Time.new(2000), customer_id: customer_1.id)
+      invoice_2 = Invoice.create!(status: 0, created_at: Time.new(2000), customer_id: customer_1.id)
+  
+      invoice_item_1 = InvoiceItem.create!(quantity: 10, unit_price: 100, status: 2, item_id: item_1.id, invoice_id: invoice_1.id)
+      invoice_item_2 = InvoiceItem.create!(quantity: 5, unit_price: 1000, status: 2, item_id: item_2.id, invoice_id: invoice_1.id)
+      invoice_item_3 = InvoiceItem.create!(quantity: 5, unit_price: 1000, status: 2, item_id: item_1.id, invoice_id: invoice_2.id)
+  
+      bulk_discount_1 = BulkDiscount.create!(percent_discount: 20, quantity_threshold: 10, merchant_id: merchant_1.id)
+      bulk_discount_2 = BulkDiscount.create!(percent_discount: 10, quantity_threshold: 9, merchant_id: merchant_1.id)
+      
+      expect(item_1.top_bulk_discount).to eq(bulk_discount_1)
+    end 
   end
 end

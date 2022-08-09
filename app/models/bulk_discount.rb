@@ -3,4 +3,6 @@ class BulkDiscount < ApplicationRecord
     validates :quantity_threshold, numericality: { greater_than: 0, only_integer: true }
 
     belongs_to :merchant
+    has_many :items, through: :merchant 
+    has_many :invoice_items, through: :items
   end
