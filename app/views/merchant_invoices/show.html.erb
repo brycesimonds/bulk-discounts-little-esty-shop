@@ -16,9 +16,8 @@
 <% @invoice.items.each do |item| %>
   <div id="items-<%= item.id %>">
     <h3>Item: <%= item.name %></h3>
-    <% binding.pry %>
     <% if item.top_bulk_discount != nil %>
-      <th><%= link_to "Bulk Discount Applied", "/merchants/#{@merchant.id}/bulk_discounts/#{item.bulk_discount.id}" %></th>
+      <th><%= link_to "Bulk Discount Applied", "/merchants/#{@merchant.id}/bulk_discounts/#{item.top_bulk_discount.id}" %></th>
     <% end %>
     <p>Quantity: <%= item.quantity_ordered(@invoice) %><p>
     <p>Price: <%= number_to_currency(item.price_sold(@invoice).fdiv(100)) %><p>

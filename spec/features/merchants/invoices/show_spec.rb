@@ -275,19 +275,16 @@ RSpec.describe "merchants invoice show page" do
     invoice_4 = Invoice.create!(status: 2, created_at: Time.new(2003), customer_id: customer_4.id)
 
     invoice_item_5 = InvoiceItem.create!(quantity: 10, unit_price: 100, status: 2, item_id: item_2.id, invoice_id: invoice_3.id)
-    invoice_item_6 = InvoiceItem.create!(quantity: 1, unit_price: 1000, status: 2, item_id: item_5.id, invoice_id: invoice_3.id)
+    invoice_item_6 = InvoiceItem.create!(quantity: 11, unit_price: 1000, status: 2, item_id: item_5.id, invoice_id: invoice_3.id)
 
     bulk_discount_1 = BulkDiscount.create!(percent_discount: 10, quantity_threshold: 10, merchant_id: merchant_1.id)
     visit "/merchants/#{merchant_1.id}/invoices/#{invoice_3.id}"
-
-    within "#items-#{item_5.id}" do
-      expect(page).to_not have_link('Bulk Discount Applied')
-    end
-
+    
     within "#items-#{item_2.id}" do
       expect(page).to have_link('Bulk Discount Applied')
       click_on 'Bulk Discount Applied'
     end
+
     expect(current_path).to eq("/merchants/#{merchant_1.id}/bulk_discounts/#{bulk_discount_1.id}")
   end 
 end
