@@ -22,14 +22,13 @@ class Invoice < ApplicationRecord
   end
 
   def discounted_revenue
-    
-    value_of_query = items.joins(merchant: :bulk_discounts).select('bulk_discounts.*, invoice_items.*,items.*, sum((invoice_items.unit_price * invoice_items.quantity * bulk_discounts.percent_discount)/100) as discounted_revenue').where('invoice_items.quantity >= bulk_discounts.quantity_threshold').group('bulk_discounts.id, invoice_items.id, items.id').order("percent_discount desc").uniq
+    value_of_query = items.joins(merchant: :bulk_discounts)
+                          .select('bulk_discounts.*, invoice_items.*,items.*, sum((invoice_items.unit_price * invoice_items.quantity * bulk_discounts.percent_discount)/100) as discounted_revenue')
+                          .where('invoice_items.quantity >= bulk_discounts.quantity_threshold')
+                          .group('bulk_discounts.id, invoice_items.id, items.id')
+                          .order("percent_discount desc")
+                          .uniq
 
-
-# value_of_query =  bulk_discounts.select('bulk_discounts.*, invoice_items.*, sum((invoice_items.unit_price * invoice_items.quantity * bulk_discounts.percent_discount)/100) as discounted_revenue')
-# .where('invoice_items.quantity >= bulk_discounts.quantity_threshold')
-# .group('bulk_discounts.id, invoice_items.id')
-# .order("percent_discount desc")
     discount_amount = []
     if value_of_query.present?
       value_of_query.each do |item|
