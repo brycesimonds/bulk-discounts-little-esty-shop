@@ -6,9 +6,21 @@
       <th><%= link_to "Dashboard", "/merchants/#{@merchant.id}/dashboard" %></th>&emsp;
       <th><%= link_to "My Items", "/merchants/#{@merchant.id}/items" %></th>&emsp;
       <th><%= link_to "My Invoices", "/merchants/#{@merchant.id}/invoices" %></th>&emsp;
-      <th><%= link_to "My Bulk Discounts", "/merchants/#{@merchant.id}/bulk_discounts" %></th>
+      <th><%= link_to "My Bulk Discounts", "/merchants/#{@merchant.id}/bulk_discounts" %></th>&emsp;
       <th><%= link_to "Create New Bulk Discount", "/merchants/#{@merchant.id}/bulk_discounts/new" %></th>
   </div>
+</div>
+
+<div class='holidays'>
+  <h3>Upcoming Holidays</h3>
+  <% @holidays.each do |holiday| %>
+    <ul>
+      <li><%= holiday.name %></li>
+      <ul>
+        <li><%= DateTime.parse(holiday.date).strftime("%m/%d/%Y") %></li>
+      </ul>
+    </ul>
+  <% end %>
 </div>
 
   <center><h2 style='background-color: #f1f1f1;'>My Bulk Discounts</h2></center>
