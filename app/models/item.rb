@@ -4,6 +4,8 @@ class Item < ApplicationRecord
   validates_presence_of :unit_price
   
   belongs_to :merchant
+  has_many :bulk_discounts, through: :merchant
+
   has_many :invoice_items
   has_many :invoices, through: :invoice_items
 
@@ -28,6 +30,13 @@ class Item < ApplicationRecord
     .order('revenue desc')
     .first
     .created_at
+  end
+
+  def top_bulk_discount
+    bulk_discounts.joins(:invoice_items)
+    .where('invoice_items.quantity >= bulk_discounts.quantity_threshold')
+    .order('percent_discount desc')
+    .first
   end
 end
 

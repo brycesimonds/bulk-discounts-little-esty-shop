@@ -17,7 +17,7 @@
   <div id="items-<%= item.id %>">
     <h3>Item: <%= item.name %></h3>
     <% binding.pry %>
-    <% if item.bulk_discount != nil %>
+    <% if item.top_bulk_discount != nil %>
       <th><%= link_to "Bulk Discount Applied", "/merchants/#{@merchant.id}/bulk_discounts/#{item.bulk_discount.id}" %></th>
     <% end %>
     <p>Quantity: <%= item.quantity_ordered(@invoice) %><p>
