@@ -280,9 +280,6 @@ RSpec.describe "merchants invoice show page" do
     bulk_discount_1 = BulkDiscount.create!(percent_discount: 10, quantity_threshold: 10, merchant_id: merchant_1.id)
     visit "/merchants/#{merchant_1.id}/invoices/#{invoice_3.id}"
 
-    save_and_open_page
-
-    
     within "#items-#{item_5.id}" do
       expect(page).to_not have_link('Bulk Discount Applied')
     end
