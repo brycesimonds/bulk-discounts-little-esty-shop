@@ -22,6 +22,12 @@ class Invoice < ApplicationRecord
   end
 
   def discounted_revenue
-    binding.pry
+    total_revenue - bulk_discounts.select('bulk_discounts.*, invoice_items.*, sum((invoice_items.unit_price * invoice_items.quantity * bulk_discounts.percent_discount)/100) as discounted_revenue')
+                                  .where('invoice_items.quantity >= bulk_discounts.quantity_threshold')
+                                  .group('bulk_discounts.id, invoice_items.id')
+                                  .order("percent_discount desc")
+                                  .limit(1)
+                                  .first
+                                  .discounted_revenue
   end
 end
