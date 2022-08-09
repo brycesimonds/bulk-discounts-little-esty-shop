@@ -35,7 +35,7 @@ RSpec.describe 'Bulk Discounts Index Page' do
         bulk_discount_5 = BulkDiscount.create!(percent_discount: 30, quantity_threshold: 20, merchant_id: merchant_1.id)
 
         visit "/merchants/#{merchant_1.id}/bulk_discounts"
-
+        
         within "#discount-#{bulk_discount_1.id}" do
             expect(page).to have_link("This discount is 20% off 10 items")
         end
@@ -217,12 +217,20 @@ RSpec.describe 'Bulk Discounts Index Page' do
         bulk_discount_5 = BulkDiscount.create!(percent_discount: 30, quantity_threshold: 20, merchant_id: merchant_1.id)
 
         visit "/merchants/#{merchant_1.id}/bulk_discounts"
-        
+
         within "#discount-#{bulk_discount_1.id}" do
             click_on("Delete This Bulk Discount")
         end
         expect(current_path).to eq("/merchants/#{merchant_1.id}/bulk_discounts")
         expect(page).to_not have_content("This discount is 20% off 10 items")
         expect(page).to have_content("This discount is 10% off 5 items")
+    end
+
+    it 'shows the 3 upcoming US holidays and their dates' do
+        merchant_1 = Merchant.create!(name: Faker::Name.name)
+
+        visit "/merchants/#{merchant_1.id}/bulk_discounts"
+
+        expect(page).to have_css("div.holidays li", :count => 6)
     end
 end 
