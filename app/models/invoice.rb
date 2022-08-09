@@ -32,7 +32,6 @@ class Invoice < ApplicationRecord
     discount_amount = []
     if value_of_query.present?
       value_of_query.each do |item|
-        binding.pry
         discount_amount << item.discounted_revenue 
       end
       return total_revenue - (discount_amount.sum)
