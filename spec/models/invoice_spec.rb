@@ -136,7 +136,44 @@ RSpec.describe Invoice do
   
       bulk_discount_1 = BulkDiscount.create!(percent_discount: 20, quantity_threshold: 10, merchant_id: merchant_1.id)
       
-      expect(invoice_1.discounted_revenue).to eq(5500)
+      expect(invoice_1.discounted_revenue).to eq(nil)
+    end 
+
+    it '.discounted revenue - example 2' do
+      merchant_1 = Merchant.create!(name: Faker::Name.name)
+  
+      item_1 = Item.create!(name: Faker::Beer.name, description: Faker::Beer.style, unit_price: 500, merchant_id: merchant_1.id )
+      item_2 = Item.create!(name: Faker::Beer.name, description: Faker::Beer.style, unit_price: 500, merchant_id: merchant_1.id )
+  
+      customer_1 = Customer.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name)
+  
+      invoice_1 = Invoice.create!(status: 0, created_at: Time.new(2000), customer_id: customer_1.id)
+  
+      invoice_item_1 = InvoiceItem.create!(quantity: 10, unit_price: 100, status: 2, item_id: item_1.id, invoice_id: invoice_1.id)
+      invoice_item_2 = InvoiceItem.create!(quantity: 5, unit_price: 1000, status: 2, item_id: item_2.id, invoice_id: invoice_1.id)
+  
+      bulk_discount_1 = BulkDiscount.create!(percent_discount: 20, quantity_threshold: 10, merchant_id: merchant_1.id)
+      
+      expect(invoice_1.discounted_revenue).to eq(5800)
+    end 
+
+    it '.discounted revenue - example 3' do
+      merchant_1 = Merchant.create!(name: Faker::Name.name)
+  
+      item_1 = Item.create!(name: Faker::Beer.name, description: Faker::Beer.style, unit_price: 500, merchant_id: merchant_1.id )
+      item_2 = Item.create!(name: Faker::Beer.name, description: Faker::Beer.style, unit_price: 500, merchant_id: merchant_1.id )
+  
+      customer_1 = Customer.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name)
+  
+      invoice_1 = Invoice.create!(status: 0, created_at: Time.new(2000), customer_id: customer_1.id)
+  
+      invoice_item_1 = InvoiceItem.create!(quantity: 12, unit_price: 10, status: 2, item_id: item_1.id, invoice_id: invoice_1.id)
+      invoice_item_2 = InvoiceItem.create!(quantity: 15, unit_price: 100, status: 2, item_id: item_2.id, invoice_id: invoice_1.id)
+  
+      bulk_discount_1 = BulkDiscount.create!(percent_discount: 20, quantity_threshold: 10, merchant_id: merchant_1.id)
+      bulk_discount_2 = BulkDiscount.create!(percent_discount: 30, quantity_threshold: 15, merchant_id: merchant_1.id)
+      
+      expect(invoice_1.discounted_revenue).to eq(1146)
     end 
   end
 end

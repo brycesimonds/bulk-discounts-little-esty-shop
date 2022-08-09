@@ -5,6 +5,6 @@
 
 <h3>Total Revenue</h3>
 <%= "Total Revenue: #{number_to_currency(@invoice.total_revenue.fdiv(100))}"%>
-<% if @invoice.discounted_revenue.present? %>
-    <%= "Discounted Revenue: #{number_to_currency(@invoice.discounted_revenue.fdiv(100))}"%>
+<% if @invoice.discounted_revenue != nil %>
+    <%= "Total Discounted Revenue: #{number_to_currency(@invoice.discounted_revenue.fdiv(100))}"%>
 <% end %>
