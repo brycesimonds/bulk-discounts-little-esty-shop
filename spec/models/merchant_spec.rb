@@ -225,7 +225,7 @@ RSpec.describe Merchant do
       invoice_item_5 = InvoiceItem.create!(quantity: 3, unit_price: 666, status: 2, item_id: item_5.id, invoice_id: invoice_3.id)
       invoice_item_6 = InvoiceItem.create!(quantity: 3, unit_price: 666, status: 2, item_id: item_5.id, invoice_id: invoice_3.id)
 
-      expect(merchant_1.ready_to_ship).to eq([item_1, item_2, item_4])
+      expect(merchant_1.ready_to_ship).to match_array([item_1, item_2, item_4])
     end
 
     it 'gets the best day for a merchant' do
