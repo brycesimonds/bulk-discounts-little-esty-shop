@@ -11,8 +11,6 @@
    ![capybara](https://img.shields.io/gem/v/capybara?label=capybara&style=flat-square)
    ![simplecov](https://img.shields.io/gem/v/simplecov?label=simplecov&style=flat-square)
    ![orderly](https://img.shields.io/gem/v/orderly?label=orderly&style=flat-square)
-   ![VCR](https://img.shields.io/gem/v/vcr?label=VCR&style=flat-square)
-   ![webmock](https://img.shields.io/gem/v/webmock?label=webmock&style=flat-square)
    ![simplecov](https://img.shields.io/gem/v/simplecov?color=blue&label=simplecov) 
 
 ## Setup
